@@ -1,8 +1,8 @@
-# serverless #
+# Serverless #
 
-[![Build Status](https://travis-ci.org/SoftInstigate/serverless-docker.svg?branch=master)](https://travis-ci.org/SoftInstigate/serverless-docker)
+[![Build Status](https://travis-ci.com/StanGirard/Serverless-Docker.svg?branch=main)](https://travis-ci.com/github/StanGirard/Serverless-Docker)
 
-A [docker image](https://hub.docker.com/r/softinstigate/serverless/) for running [serverless](https://serverless.com) commands.
+A [docker image](https://hub.docker.com/r/stangirard/serverless) for running [serverless](https://serverless.com) commands.
 
 This can be useful for building and deploying serverless stacks from CI environments.
 
@@ -11,44 +11,33 @@ The `RELEASE` global variable in [.travis.yml](.travis.yml) contains the [server
 ## Example ##
 
 ```
-$ docker pull softinstigate/serverless
-$ docker run --rm softinstigate/serverless --version
+$ docker pull stangirard/serverless
+$ docker run --rm stangirard/serverless serverless --version
 ```
 
 ## Base image ##
 
-[softinstigate/maven-aws](https://hub.docker.com/r/softinstigate/maven-aws/)
-
-The base image is from the [maven](https://hub.docker.com/_/maven/) one, so it allows to also build serverless projects for **Java** .
+[Debian Slim Buster](https://hub.docker.com/_/debian)
 
 Included packages from base image:
 
 - [aws-cli](https://github.com/aws/aws-cli).
-- [ecs-cli](https://github.com/aws/amazon-ecs-cli)
+- Python 3.7.9
+- NodeJS 12.x
 
 ## Check the installed tools
 
 ```bash
-docker run -it --rm --entrypoint="./startup.sh" softinstigate/serverless
+docker run -it --rm --entrypoint="./startup.sh" stangirard/serverless
 
 =================================================
-Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
-Maven home: /usr/share/maven
-Java version: 11.0.9, vendor: Oracle Corporation, runtime: /usr/local/openjdk-11
-Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "4.19.76-linuxkit", arch: "amd64", family: "unix"
-aws-cli/2.0.59 Python/3.7.3 Linux/4.19.76-linuxkit exe/x86_64.debian.10
-ecs-cli version 1.20.0 (7547c45)
-node v12.19.0
+Python 3.7.9
+aws-cli/2.1.4 Python/3.7.3 Linux/5.4.39-linuxkit exe/x86_64.debian.10
+node v12.20.0
 yarn 1.22.5
-serverless Framework Core: 2.8.0
-Plugin: 4.1.1
+serverless Framework Core: 2.12.0
+Plugin: 4.1.2
 SDK: 2.3.2
-Components: 3.2.7
+Components: 3.4.2
 =================================================
 ```
-
-## Additional packages ##
-
-- Nodejs 12 LTS
-- Serverless cli 2.x
