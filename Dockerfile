@@ -4,10 +4,14 @@ ARG RELEASE
 
 LABEL maintainer="StanGirard <stan@primates.dev>"
 
-RUN apt-get update && apt-get -y install groff
+## Install AWS Cli
+RUN apt-get clean & apt-get update
+RUN apt-get install curl unzip -y
 RUN curl --silent --show-error --fail "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 RUN unzip awscliv2.zip
 RUN ./aws/install
+
+
 
 # Install node.js and yarn
 RUN rm -rf /var/lib/apt/lists/*
@@ -28,4 +32,4 @@ RUN yarn global add serverless@${RELEASE}
 COPY bin/startup.sh .
 RUN "./startup.sh"
 
-ENTRYPOINT [ "serverless" ]
+
