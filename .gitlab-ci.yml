@@ -8,11 +8,13 @@ deploy:
   services:
     - name: docker:dind
   before_script:
+    - export RELEASE=`cat VERSION`
     - docker build --build-arg RELEASE="$RELEASE" -t stangirard/serverless .
     - docker tag stangirard/serverless:latest stangirard/serverless:"$RELEASE"
   script:
     - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
     - docker push stangirard/serverless:latest;
     - docker push stangirard/serverless:"$RELEASE";
-  variables:
-    RELEASE: 2.13.0
+  only:
+    changes:
+      - VERSION
