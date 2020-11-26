@@ -31,7 +31,7 @@ version:
     - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - chmod +x bin/bersion-comparator.sh
+    - chmod +x /bin/bersion-comparator.sh
     - ./bin/version-comparator.sh $REPOSITORY
     - git config --global user.email "${CI_EMAIL}"
     - git config --global user.name "${CI_USERNAME}"
