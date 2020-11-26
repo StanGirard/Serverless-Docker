@@ -25,7 +25,7 @@ deploy:
 version:on-schedule:
   stage: version
   before_script:
-    - apk update -q && apk add bash git
+    - apk update -q && apk add bash git curl
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qq )'
     - eval `ssh-agent -s`
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke

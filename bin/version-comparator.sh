@@ -36,8 +36,9 @@ vercomp () {
 }
 
 RELEASE=`cat VERSION`
-NEW_VERSION=`git ls-remote --tags "$1" | cut -d/ -f3- | tail -n1 | cut -c2-;`
+NEW_VERSION=`curl --silent "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'| cut -c2-;`
 echo $RELEASE
+echo $NEW_VERSION
 vercomp $RELEASE $NEW_VERSION
 if [[ $? -eq 2 ]]; then
     printf $NEW_VERSION > VERSION
