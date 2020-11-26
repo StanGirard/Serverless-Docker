@@ -1,6 +1,7 @@
 image: docker:latest
 
 stages:
+  - version
   - deploy
   
 deploy:
@@ -15,15 +16,14 @@ deploy:
     - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
     - docker push stangirard/serverless:latest;
     - docker push stangirard/serverless:"$RELEASE";
-  
-  except:
-    - schedules
   only:
     changes:
       - VERSION
+  except:
+    - schedules
 
-version:
-  stage: deploy
+version:on-schedule:
+  stage: version
   before_script:
     - apk update -q && apk add bash git
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qq )'
