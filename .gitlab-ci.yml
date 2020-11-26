@@ -11,6 +11,7 @@ deploy:
     - docker build --build-arg RELEASE="$RELEASE" -t stangirard/serverless .
     - docker tag stangirard/serverless:latest stangirard/serverless:"$RELEASE"
   script:
+    - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
     - docker push stangirard/serverless:latest;
     - docker push stangirard/serverless:"$RELEASE";
   variables:
