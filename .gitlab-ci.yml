@@ -16,3 +16,4 @@ deploy:
     - docker push stangirard/serverless:"$RELEASE";
   variables:
     RELEASE: 2.13.0
+    DOCKER_HOST: tcp://docker:2375
