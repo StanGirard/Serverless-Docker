@@ -15,4 +15,4 @@ deploy:
     - docker push stangirard/serverless:latest;
     - docker push stangirard/serverless:"$RELEASE";
   variables:
-    RELEASE: 2.12.0
+    RELEASE: 2.13.0
