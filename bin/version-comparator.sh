@@ -41,8 +41,6 @@ echo $RELEASE
 vercomp $RELEASE $NEW_VERSION
 if [[ $? -eq 2 ]]; then
     printf $NEW_VERSION > VERSION
-    exit 0
 else
     echo nothing
-    exit 1
 fi
