@@ -5,11 +5,17 @@ stages:
   
 deploy:
   stage: deploy
-  image: docker:latest
+  image: docker:19.03
+  services:
+    - name: docker:19.03-dind
   before_script:
-    - ./bin/build.sh
+    - docker build --network=host --build-arg RELEASE="$RELEASE" -t stangirard/serverless .
+    - docker tag stangirard/serverless:latest stangirard/serverless:"$RELEASE"
   script:
-    - ./bin/push.sh
+    - docker push stangirard/serverless:latest;
+    - docker push stangirard/serverless:"$RELEASE";
   variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: 'tcp://localhost:2375' 
     RELEASE: 2.12.0
 
