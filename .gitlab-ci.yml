@@ -22,8 +22,8 @@ deploy:
 version:
   stage: deploy
   before_script:
-    - apk update -qy && apk add bash
-    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - apk update -q && apk add bash
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qq )'
     - eval `ssh-agent -s`
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
     - mkdir -p ~/.ssh
