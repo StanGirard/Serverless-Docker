@@ -21,7 +21,7 @@ deploy:
 
 version:
   stage: deploy
-  image: debian:buster-slim
+  image: alpine/git:latest
   before_script:
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
     - eval `ssh-agent -s`
