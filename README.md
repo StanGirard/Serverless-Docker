@@ -1,12 +1,12 @@
 # Serverless #
 
-[![Build Status](https://travis-ci.com/StanGirard/Serverless-Docker.svg?branch=main)](https://travis-ci.com/github/StanGirard/Serverless-Docker)
+[![Build Status](https://gitlab.com/StanGirard/Serverless-Docker/badges/main/pipeline.svg)](https://gitlab.com/StanGirard/Serverless-Docker/)
 
 A [docker image](https://hub.docker.com/r/stangirard/serverless) for running [serverless](https://serverless.com) commands.
 
 This can be useful for building and deploying serverless stacks from CI environments.
 
-The `RELEASE` global variable in [.travis.yml](.travis.yml) contains the [serverless release](https://github.com/serverless/serverless/releases) to be built.
+The `VERSION` file contains the [serverless release](https://github.com/serverless/serverless/releases) to be built.
 
 ## Example ##
 
