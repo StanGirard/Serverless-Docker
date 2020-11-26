@@ -1,0 +1,15 @@
+image: stangirard/serverless:latest
+
+stages:
+  - deploy
+  
+deploy:
+  stage: deploy
+  image: docker:latest
+  before_script:
+    - ./bin/build.sh
+  script:
+    - ./bin/push.sh
+  variables:
+    RELEASE: 2.12.0
+
