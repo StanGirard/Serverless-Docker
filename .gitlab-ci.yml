@@ -1,0 +1,17 @@
+image: docker:latest
+
+stages:
+  - deploy
+  
+deploy:
+  stage: deploy
+  services:
+    - name: docker:dind
+  before_script:
+    - docker build --build-arg RELEASE="$RELEASE" -t stangirard/serverless .
+    - docker tag stangirard/serverless:latest stangirard/serverless:"$RELEASE"
+  script:
+    - docker push stangirard/serverless:latest;
+    - docker push stangirard/serverless:"$RELEASE";
+  variables:
+    RELEASE: 2.12.0
