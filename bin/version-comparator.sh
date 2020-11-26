@@ -37,7 +37,7 @@ vercomp () {
 
 RELEASE=`cat VERSION`
 echo "Repository: $1"
-NEW_VERSION=`curl --silent "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'| cut -c2-;`
+NEW_VERSION=`curl "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'| cut -c2-;`
 echo "Release ${RELEASE}"
 echo "New Version ${NEW_VERSION}"
 vercomp $RELEASE $NEW_VERSION
