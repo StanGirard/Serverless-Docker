@@ -15,6 +15,9 @@ deploy:
     - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
     - docker push stangirard/serverless:latest;
     - docker push stangirard/serverless:"$RELEASE";
+  
+  except:
+    - schedules
   only:
     changes:
       - VERSION
@@ -41,4 +44,6 @@ version:
     - git push origin HEAD:$CI_COMMIT_REF_NAME # Pushes to the same branch as the trigger
   variables:
     REPOSITORY: https://github.com/serverless/serverless  
+  only:
+    - schedules
 
