@@ -43,6 +43,9 @@ echo "New Version ${NEW_VERSION}"
 vercomp $RELEASE $NEW_VERSION
 if [[ $? -eq 2 ]]; then
     printf $NEW_VERSION > VERSION
+    git add VERSION # Force add PDF since we .gitignored it
+    git commit -m "VERSION=${NEW_VERSION}"
+    git tag -a "v${NEW_VERSION}" -m "New Serverless Version"
 else
-    echo nothing
+    echo "No changes, nothing to commit!"
 fi
