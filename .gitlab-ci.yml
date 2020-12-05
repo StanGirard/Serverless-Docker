@@ -25,6 +25,7 @@ version:on-schedule:
   image: stangirard/alpine-powerhouse
   stage: version
   before_script:
+    - eval `ssh-agent -s`
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
