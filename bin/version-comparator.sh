@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [[ -z $1 ]]; then
     echo "Error: undefined Github repository"
     exit 1

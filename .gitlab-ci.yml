@@ -22,9 +22,10 @@ deploy:
     - schedules
 
 version:on-schedule:
-  image: stangirard/alpine-powerhouse
   stage: version
   before_script:
+    - apk update -q && apk add bash git curl
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qq )'
     - eval `ssh-agent -s`
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
     - mkdir -p ~/.ssh
@@ -34,7 +35,7 @@ version:on-schedule:
   script:
     - git config --global user.email "${CI_EMAIL}"
     - git config --global user.name "${CI_USERNAME}"
-    - sh ./bin/version-comparator.sh $REPOSITORY
+    - ./bin/version-comparator.sh $REPOSITORY
     - git remote rm origin && git remote add origin git@gitlab.com:$CI_PROJECT_PATH.git
     - git push origin HEAD:$CI_COMMIT_REF_NAME # Pushes to the same branch as the trigger
     - git push origin --tags
