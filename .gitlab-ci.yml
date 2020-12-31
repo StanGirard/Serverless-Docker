@@ -22,7 +22,7 @@ deploy:
     - schedules
 
 version:on-schedule:
-  image: stangirard/alpine-powerhouse:latest
+  image: stangirard/alpine-powerhouse:3.12.1
   stage: version
   before_script:
     - eval `ssh-agent -s`
