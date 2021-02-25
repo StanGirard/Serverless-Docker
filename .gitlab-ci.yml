@@ -3,7 +3,7 @@ image: docker:latest
 stages:
   - version
   - deploy
-  
+
 deploy:
   stage: deploy
   services:
@@ -22,7 +22,7 @@ deploy:
     - schedules
 
 version:on-schedule:
-  image: stangirard/alpine-powerhouse:3.12.1
+  image: stangirard/alpine-powerhouse:latest
   stage: version
   before_script:
     - eval `ssh-agent -s`
@@ -39,7 +39,6 @@ version:on-schedule:
     - git push origin HEAD:$CI_COMMIT_REF_NAME # Pushes to the same branch as the trigger
     - git push origin --tags
   variables:
-    REPOSITORY: serverless/serverless  
+    REPOSITORY: serverless/serverless
   only:
     - schedules
-
